@@ -1,82 +1,92 @@
 ﻿using System;
-
+using Tyuiu.RomanovskiiMP.Sprint2.Task3.V4.Lib;
+using tyuiu.cources.programming.interfaces;
+using tyuiu.cources.programming.interfaces.Sprint1;
 namespace FunctionCalculator
 {
-    public static class FunctionCalculator
+    public class DataServes : ISprint1Task3V4
     {
-        public static double CalculateY(double x)
+        public double PurchaseAmount(double priceNotebook, double priceCover, int quantity)
         {
-            if (x > 1)
-            {
-                // y = x + ((x+1)/(x-1))^x
-                return x + Math.Pow((x + 1) / (x - 1), x);
-            }
-            else if (Math.Abs(x) < 1e-10) // x == 0 с учётом погрешности для double
-            {
-                // y = (x^2 + cos(x^2)) / (x^2 - sin(x^2) + 12)
-                double x2 = x * x;
-                return (x2 + Math.Cos(x2)) / (x2 - Math.Sin(x2) + 12);
-            }
-            else if (x > -8 && x < 0)
-            {
-                // y = (x - 1/x^2)^x
-                return Math.Pow(x - 1 / (x * x), x);
-            }
-            else if (x < -8)
-            {
-                // y = x + 10x - (1/x)
-                return x + 10 * x - (1 / x);
-            }
-            else
-            {
-                // Для x = 1, x = -8 и других граничных значений
-                throw new ArgumentException($"Значение x = {x} не попадает в область определения функции");
-            }
+            throw new NotImplementedException();
+
         }
-
-        public static double RoundToThreeDecimalPlaces(double value)
+        public static class FunctionCalculator
         {
-            return Math.Round(value, 3);
-        }
-    }
-
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Программа вычисления значения функции Y");
-            Console.WriteLine("=========================================");
-
-            try
+            public static double CalculateY(double x)
             {
-                Console.Write("Введите значение x: ");
-                string input = Console.ReadLine();
-
-                if (double.TryParse(input, out double x))
+                if (x > 1)
                 {
-                    double y = FunctionCalculator.CalculateY(x);
-                    double roundedY = FunctionCalculator.RoundToThreeDecimalPlaces(y);
-
-                    Console.WriteLine($"\nРезультат вычисления:");
-                    Console.WriteLine($"y = {y:F10}");
-                    Console.WriteLine($"y (округлено до 3 знаков) = {roundedY:F3}");
+                    // y = x + ((x+1)/(x-1))^x
+                    return x + Math.Pow((x + 1) / (x - 1), x);
+                }
+                else if (Math.Abs(x) < 1e-10) // x == 0 с учётом погрешности для double
+                {
+                    // y = (x^2 + cos(x^2)) / (x^2 - sin(x^2) + 12)
+                    double x2 = x * x;
+                    return (x2 + Math.Cos(x2)) / (x2 - Math.Sin(x2) + 12);
+                }
+                else if (x > -8 && x < 0)
+                {
+                    // y = (x - 1/x^2)^x
+                    return Math.Pow(x - 1 / (x * x), x);
+                }
+                else if (x < -8)
+                {
+                    // y = x + 10x - (1/x)
+                    return x + 10 * x - (1 / x);
                 }
                 else
                 {
-                    Console.WriteLine("Ошибка: Введено некорректное число");
+                    // Для x = 1, x = -8 и других граничных значений
+                    throw new ArgumentException($"Значение x = {x} не попадает в область определения функции");
                 }
             }
-            catch (ArgumentException ex)
-            {
-                Console.WriteLine($"Ошибка: {ex.Message}");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Ошибка вычисления: {ex.Message}");
-            }
 
-            Console.WriteLine("\nНажмите любую клавишу для выхода...");
-            Console.ReadKey();
+            public static double RoundToThreeDecimalPlaces(double value)
+            {
+                return Math.Round(value, 3);
+            }
+        }
+
+        class Program
+        {
+            static void Main(string[] args)
+            {
+                Console.WriteLine("Программа вычисления значения функции Y");
+                Console.WriteLine("=========================================");
+
+                try
+                {
+                    Console.Write("Введите значение x: ");
+                    string input = Console.ReadLine();
+
+                    if (double.TryParse(input, out double x))
+                    {
+                        double y = FunctionCalculator.CalculateY(x);
+                        double roundedY = FunctionCalculator.RoundToThreeDecimalPlaces(y);
+
+                        Console.WriteLine($"\nРезультат вычисления:");
+                        Console.WriteLine($"y = {y:F10}");
+                        Console.WriteLine($"y (округлено до 3 знаков) = {roundedY:F3}");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Ошибка: Введено некорректное число");
+                    }
+                }
+                catch (ArgumentException ex)
+                {
+                    Console.WriteLine($"Ошибка: {ex.Message}");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Ошибка вычисления: {ex.Message}");
+                }
+
+                Console.WriteLine("\nНажмите любую клавишу для выхода...");
+                Console.ReadKey();
+            }
         }
     }
 }
